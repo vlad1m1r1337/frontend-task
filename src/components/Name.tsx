@@ -4,7 +4,7 @@ import {setName} from "../store/tableSlice";
 
 export const Name : React.FC = () => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const value = useAppSelector(state => state.table.name);
+    const value = useAppSelector(state => state.table.addToTable.name);
     const dispatch = useAppDispatch();
 
     const changeHandler = (value : string) => {
@@ -22,6 +22,7 @@ export const Name : React.FC = () => {
                    ref={inputRef}
                    type="text"
                    name="name"
+                   value={value}
             />
         </>
     )

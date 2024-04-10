@@ -9,19 +9,6 @@ import {useAppSelector} from "../hooks";
 export const Table : React.FC = () => {
     const dispatch = useAppDispatch();
     const Data = useAppSelector(state => state.table.table);
-    // const fetchData = async () => {
-    //     try {
-    //         const response = await fetch('http://localhost:3001/users');
-    //         if (!response.ok) {
-    //             throw new Error('Ошибка запроса');
-    //         }
-    //         const jsonData = await response.json();
-    //         setData(jsonData);
-    //         console.log("jsonData", jsonData);
-    //     } catch (error) {
-    //         console.error('Ошибка при получении данных:', error);
-    //     }
-    // };
     useEffect(() => {
         dispatch(fetchTable());
     }, []);

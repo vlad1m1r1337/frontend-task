@@ -5,8 +5,11 @@ import {Username} from "./Username";
 import {Email} from "./Email";
 import {Phone} from "./Phone";
 import {Website} from "./Website";
-
+import {useAppDispatch, useAppSelector} from "../hooks";
+import {postToTable, clearInputs} from "../store/tableSlice";
 export const Form : React.FC = () => {
+    const dispatch = useAppDispatch();
+    const addToTable = useAppSelector(state => state.table.addToTable);
     const postData = async () => {
         const newUser = {
             name: 'John DickSon',
@@ -32,6 +35,7 @@ export const Form : React.FC = () => {
     }
     const addField = (e:  React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
+        dispatch(postToTable(addToTable));
     }
     return (
         <header className="header">

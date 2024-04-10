@@ -10,7 +10,10 @@
 }
 
 .cells {
+    display: flex;
+    flex-direction: row;
     border: 1px solid black;
+    gap: 10px;
 }
 
 .cells_value {

@@ -2,7 +2,7 @@ import {useAppDispatch, useAppSelector} from "../hooks";
 import {setWebsite} from "../store/tableSlice";
 
 export const Website: React.FC = () => {
-    const value = useAppSelector(state => state.table.website);
+    const value = useAppSelector(state => state.table.addToTable.website);
     const dispatch = useAppDispatch();
 
     const changeHandler = (value : string) => {

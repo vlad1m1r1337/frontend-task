@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from "../hooks";
 import {setUsername} from "../store/tableSlice";
 
 export const Username: React.FC = () => {
-    const value = useAppSelector(state => state.table.username);
+    const value = useAppSelector(state => state.table.addToTable.username);
     const dispatch = useAppDispatch();
 
     const changeHandler = (value : string) => {

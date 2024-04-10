@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from "../hooks";
 import {setEmail} from "../store/tableSlice";
 
 export const Email: React.FC = () => {
-    const value = useAppSelector(state => state.table.email);
+    const value = useAppSelector(state => state.table.addToTable.email);
     const dispatch = useAppDispatch();
 
     const changeHandler = (value : string) => {
