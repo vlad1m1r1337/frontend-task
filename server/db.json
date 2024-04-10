@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "name": "John Doe",
+      "username": "johndoe",
+      "email": "johndoe@example.com",
+      "phone": "1-477-935-8478 x6430",
+      "website": "google.com",
+      "id": "23cd"
+    },
+    {
+      "name": "Jane Smith",
+      "username": "janesmith",
+      "email": "janesmith@example.com",
+      "phone": "1-234-567-8901",
+      "website": "example.com",
+      "id": "ee67"
+    },
+    {
+      "name": "Michael Johnson",
+      "username": "michaelj",
+      "email": "michaelj@example.com",
+      "phone": "1-345-678-9012",
+      "website": "michaeljohnson.com",
+      "id": "5934"
+    }
+  ]
+}

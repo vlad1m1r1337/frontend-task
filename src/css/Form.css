@@ -1,0 +1,9 @@
+/*.header {*/
+/*    display: block;*/
+/*}*/
+
+.header_name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
