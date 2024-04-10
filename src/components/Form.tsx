@@ -1,12 +1,12 @@
 import React, {useEffect, useRef} from "react";
+import {TableProps} from "../types/fetchedData";
+import {Name} from "./Name";
+import {Username} from "./Username";
+import {Email} from "./Email";
+import {Phone} from "./Phone";
+import {Website} from "./Website";
 
 export const Form : React.FC = () => {
-
-    const inputRef = useRef<HTMLInputElement>(null);
-
-    useEffect(() => {
-        inputRef.current?.focus();
-    }, []);
     const postData = async () => {
         const newUser = {
             name: 'John DickSon',
@@ -30,29 +30,19 @@ export const Form : React.FC = () => {
             console.error('Ошибка при получении данных:', error);
         }
     }
-
+    const addField = (e:  React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+    }
     return (
         <header className="header">
-            <button onClick={() => postData()}>POST</button>
             <h2 className="header_name">Форма Отправки</h2>
             <form className="form_wrapper">
-
-                <label htmlFor="name">Name: </label>
-                <input ref={inputRef} type="text" name="name"/>
-
-                <label htmlFor="text">Username: </label>
-                <input type="text" name="text"/>
-
-                <label htmlFor="email">Email: </label>
-                <input type="email" name="email"/>
-
-                <label htmlFor="number">Phone: </label>
-                <input type="number" name="number"/>
-
-                <label htmlFor="number">Website: </label>
-                <input type="number" name="number"/>
-
-                <button onClick={e => e.preventDefault()} type="submit">Отправить</button>
+                <Name />
+                <Username />
+                <Email />
+                <Phone />
+                < Website />
+                <button onClick={e => addField(e)} type="submit">Отправить</button>
             </form>
         </header>
     )

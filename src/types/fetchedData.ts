@@ -5,3 +5,13 @@ export interface fetchedData {
     phone: string;
     website: string;
 }
+
+export interface TableProps {
+    Data: fetchedData[];
+    setData: React.Dispatch<React.SetStateAction<fetchedData[]>>;
+}
+
+export interface RowProps {
+    index: number;
+    el: fetchedData;
+}
