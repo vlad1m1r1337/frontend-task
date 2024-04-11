@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction, createAsyncThunk} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction, createAsyncThunk, AnyAction} from "@reduxjs/toolkit";
 import {AppDispatch} from "./index";
 export const fetchTable = createAsyncThunk<Table[], undefined, {rejectValue: string}>(
     'table/fetchTable',
@@ -44,6 +44,8 @@ type Table = {
 interface InitialState {
     table: Table[];
     addToTable: Table;
+    error: string | null;
+    loading: boolean;
 }
 
 const initialState: InitialState = {
@@ -55,6 +57,8 @@ const initialState: InitialState = {
         username: '',
         website: '',
     },
+    error: null,
+    loading: false,
 }
 
 const tableSlice = createSlice({
@@ -91,8 +95,17 @@ const tableSlice = createSlice({
     },
     extraReducers: builder => {
         builder
+            .addCase(fetchTable.pending, state => {
+                state.loading = true;
+                state.error = null;
+            })
             .addCase(fetchTable.fulfilled , (state, action) => {
                 state.table = action.payload;
+                state.loading = false;
+            })
+            .addCase(postToTable.pending, state => {
+                state.loading = true;
+                state.error = null;
             })
             .addCase(postToTable.fulfilled, (state, action) => {
                 state.addToTable = {
@@ -102,7 +115,12 @@ const tableSlice = createSlice({
                     username: '',
                     website: '',
                 }
-            });
+                state.loading = false;
+            })
+            .addMatcher(isError, (state, action:PayloadAction<string>) => {
+                state.error = action.payload;
+                state.loading = false;
+            })
     }
 });
 
@@ -116,3 +134,7 @@ export const {
     setWebsite,
 } = tableSlice.actions;
 export default tableSlice.reducer;
+
+const isError = (action: AnyAction) => {
+    return action.type.endsWith('rejected');
+}

@@ -6,6 +6,11 @@ import {Phone} from "./Phone";
 import {Website} from "./Website";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import {postToTable} from "../store/tableSlice";
+import { Button } from 'primereact/button';
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+
+
+
 export const Form : React.FC = () => {
     const dispatch = useAppDispatch();
     const addToTable = useAppSelector(state => state.table.addToTable);
@@ -45,7 +50,7 @@ export const Form : React.FC = () => {
                 <Email />
                 <Phone />
                 < Website />
-                <button onClick={e => addField(e)} type="submit">Отправить</button>
+                <Button onClick={e => addField(e)} type="submit">Отправить</Button>
             </form>
         </header>
     )

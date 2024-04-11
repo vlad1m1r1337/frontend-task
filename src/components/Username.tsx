@@ -1,5 +1,7 @@
 import {useAppDispatch, useAppSelector} from "../hooks";
 import {setUsername} from "../store/tableSlice";
+import { InputText } from 'primereact/inputtext';
+
 
 export const Username: React.FC = () => {
     const value = useAppSelector(state => state.table.addToTable.username);
@@ -10,12 +12,14 @@ export const Username: React.FC = () => {
     }
     return (
         <>
-            <label htmlFor="username">Username: </label>
-            <input onChange={e => changeHandler(e.target.value)}
-                   value={value}
-                   type="text"
-                   name="username"
-            />
+            <div>
+                <label htmlFor="username">Username: </label>
+                <InputText onChange={e => changeHandler(e.target.value)}
+                           value={value}
+                           type="text"
+                           name="username"
+                />
+            </div>
         </>
     )
 }

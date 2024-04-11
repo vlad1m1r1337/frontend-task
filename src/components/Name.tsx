@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from "react";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import {setName} from "../store/tableSlice";
+import { InputText } from 'primereact/inputtext';
 
 export const Name : React.FC = () => {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -17,13 +18,15 @@ export const Name : React.FC = () => {
 
     return (
         <>
-            <label htmlFor="name">Name: </label>
-            <input onChange={e => changeHandler(e.target.value)}
-                   ref={inputRef}
-                   type="text"
-                   name="name"
-                   value={value}
-            />
+            <div>
+                <label htmlFor="name">Name: </label>
+                <InputText onChange={e => changeHandler(e.target.value)}
+                           ref={inputRef}
+                           type="text"
+                           name="name"
+                           value={value}
+                />
+            </div>
         </>
     )
 }
