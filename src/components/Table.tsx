@@ -1,7 +1,7 @@
 import '../css/Table.css'
 import {useEffect} from "react";
 import {Row} from "./Row";
-import {fetchedData, TableProps} from "../types/fetchedData";
+import {fetchedData} from "../types/fetchedData";
 import {useAppDispatch} from "../hooks";
 import {fetchTable} from "../store/tableSlice";
 import {useAppSelector} from "../hooks";

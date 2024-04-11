@@ -1,12 +1,11 @@
-import React, {useEffect, useRef} from "react";
-import {TableProps} from "../types/fetchedData";
+import React from "react";
 import {Name} from "./Name";
 import {Username} from "./Username";
 import {Email} from "./Email";
 import {Phone} from "./Phone";
 import {Website} from "./Website";
 import {useAppDispatch, useAppSelector} from "../hooks";
-import {postToTable, clearInputs} from "../store/tableSlice";
+import {postToTable} from "../store/tableSlice";
 export const Form : React.FC = () => {
     const dispatch = useAppDispatch();
     const addToTable = useAppSelector(state => state.table.addToTable);

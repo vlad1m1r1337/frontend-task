@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './css/Form.css'
 import {Form} from "./components/Form";
 import {Table} from "./components/Table";
-import {fetchedData} from "./types/fetchedData";
 function App() {
     return (
       <>
