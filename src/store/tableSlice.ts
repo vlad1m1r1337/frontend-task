@@ -1,9 +1,12 @@
 import {createSlice, PayloadAction, createAsyncThunk, AnyAction} from "@reduxjs/toolkit";
 import {AppDispatch} from "./index";
+
+export const API_URL = 'http://localhost:3001/users';
+
 export const fetchTable = createAsyncThunk<Table[], undefined, {rejectValue: string}>(
     'table/fetchTable',
     async function (_,  {rejectWithValue}) {
-        const response = await fetch('http://localhost:3001/users');
+        const response = await fetch(API_URL);
 
         if (!response.ok) {
             return rejectWithValue('Ошибка запроса');
@@ -17,7 +20,7 @@ export const fetchTable = createAsyncThunk<Table[], undefined, {rejectValue: str
 export const postToTable = createAsyncThunk<Table[], Table, {rejectValue: string, dispatch: AppDispatch}>(
     'table/addToTable',
     async function (table, {rejectWithValue, dispatch}) {
-        const response = await fetch('http://localhost:3001/users', {
+        const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'

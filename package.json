@@ -47,6 +47,7 @@
     ]
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "redux-mock-store": "^1.5.4"
   }
 }
