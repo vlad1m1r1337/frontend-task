@@ -5,3 +5,8 @@ body {
   align-items: center;
 }
 
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

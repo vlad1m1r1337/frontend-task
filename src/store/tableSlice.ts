@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction, createAsyncThunk, AnyAction} from "@reduxjs/toolkit";
 import {AppDispatch} from "./index";
-
+import {inputs_validation} from "../utils/inputs_validation";
 export const API_URL = 'http://localhost:3001/users';
 
 export const fetchTable = createAsyncThunk<Table[], undefined, {rejectValue: string}>(
@@ -20,6 +20,8 @@ export const fetchTable = createAsyncThunk<Table[], undefined, {rejectValue: str
 export const postToTable = createAsyncThunk<Table[], Table, {rejectValue: string, dispatch: AppDispatch}>(
     'table/addToTable',
     async function (table, {rejectWithValue, dispatch}) {
+        if (inputs_validation(table, dispatch) !== 0) { return ;}
+        console.log("some");
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
@@ -37,18 +39,32 @@ export const postToTable = createAsyncThunk<Table[], Table, {rejectValue: string
     }
 );
 
-type Table = {
+export type Table = {
     name: string;
     email: string;
     phone: string;
     username: string;
     website: string;
 }
+
+type RequestStatus = {
+    error: string | null;
+    loading: boolean;
+}
+
+type InputValidation = {
+    name_input: string;
+    email_input: string;
+    phone_input: string;
+    username_input: string;
+    website_input: string;
+}
+
 interface InitialState {
     table: Table[];
     addToTable: Table;
-    error: string | null;
-    loading: boolean;
+    request_status: RequestStatus;
+    input_validation: InputValidation;
 }
 
 const initialState: InitialState = {
@@ -60,8 +76,17 @@ const initialState: InitialState = {
         username: '',
         website: '',
     },
-    error: null,
-    loading: false,
+    request_status: {
+        error: null,
+        loading: false,
+    },
+    input_validation: {
+        name_input: '',
+        email_input: '',
+        phone_input: '',
+        username_input: '',
+        website_input: '',
+    }
 }
 
 const tableSlice = createSlice({
@@ -94,40 +119,74 @@ const tableSlice = createSlice({
         },
         mergeTable: (state) => {
             state.table.push(state.addToTable);
+        },
+        set_input_name_error: (state, action: PayloadAction<string>) => {
+            state.input_validation.name_input = action.payload;
+        },
+        set_input_username_error: (state, action: PayloadAction<string>) => {
+            state.input_validation.username_input = action.payload;
+        },
+        set_input_email_error: (state, action: PayloadAction<string>) => {
+            state.input_validation.email_input = action.payload;
+        },
+        set_input_phone_error: (state, action: PayloadAction<string>) => {
+            state.input_validation.phone_input = action.payload;
+        },
+        set_input_website_error: (state, action: PayloadAction<string>) => {
+            state.input_validation.website_input = action.payload;
+        },
+        reset_inputs_errors: (state) => {
+            state.input_validation = {
+                name_input: '',
+                email_input: '',
+                phone_input: '',
+                username_input: '',
+                website_input: '',
+            }
         }
     },
     extraReducers: builder => {
         builder
             .addCase(fetchTable.pending, state => {
-                state.loading = true;
-                state.error = null;
+                state.request_status.loading = true;
+                state.request_status.error = null;
             })
             .addCase(fetchTable.fulfilled , (state, action) => {
                 state.table = action.payload;
-                state.loading = false;
+                state.request_status.loading = false;
             })
             .addCase(postToTable.pending, state => {
-                state.loading = true;
-                state.error = null;
+                state.request_status.loading = true;
+                state.request_status.error = null;
             })
             .addCase(postToTable.fulfilled, (state, action) => {
-                state.addToTable = {
-                    name: '',
-                    email: '',
-                    phone: '',
-                    username: '',
-                    website: '',
+                const arr = Object.values(state.input_validation);
+                console.log(arr);
+                if (arr.every((el) => el === '')) {
+                    state.addToTable = {
+                        name: '',
+                        email: '',
+                        phone: '',
+                        username: '',
+                        website: '',
+                    }
                 }
-                state.loading = false;
+                state.request_status.loading = false;
             })
             .addMatcher(isError, (state, action:PayloadAction<string>) => {
-                state.error = action.payload;
-                state.loading = false;
+                state.request_status.error = action.payload;
+                state.request_status.loading = false;
             })
     }
 });
 
 export const {
+    set_input_website_error,
+    set_input_phone_error,
+    set_input_email_error,
+    set_input_username_error,
+    set_input_name_error,
+    reset_inputs_errors,
     mergeTable,
     clearInputs,
     setName,
