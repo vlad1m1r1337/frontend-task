@@ -29,7 +29,7 @@ export const Form : React.FC = () => {
                 <Email />
                 <Phone />
                 < Website />
-                <Button onClick={e => addField(e)} loading={loading} type="submit">Отправить</Button>
+                <Button label="Отправить" icon="pi pi-check" loading={loading} onClick={e => addField(e)}/>
             </form>
         </header>
     )

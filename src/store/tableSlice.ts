@@ -67,7 +67,7 @@ interface InitialState {
     input_validation: InputValidation;
 }
 
-const initialState: InitialState = {
+export const initialState: InitialState = {
     table: [],
     addToTable: {
         name: '',
@@ -107,15 +107,6 @@ const tableSlice = createSlice({
         },
         setWebsite: (state, action: PayloadAction<string>) => {
             state.addToTable.website = action.payload;
-        },
-        clearInputs: (state) => {
-            state.addToTable = {
-                name: '',
-                email: '',
-                phone: '',
-                username: '',
-                website: '',
-            }
         },
         mergeTable: (state) => {
             state.table.push(state.addToTable);
@@ -188,7 +179,6 @@ export const {
     set_input_name_error,
     reset_inputs_errors,
     mergeTable,
-    clearInputs,
     setName,
     setEmail,
     setPhone,
