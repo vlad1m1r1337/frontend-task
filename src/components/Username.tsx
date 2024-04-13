@@ -22,7 +22,7 @@ export const Username: React.FC = () => {
                            type="text"
                            name="username"
                 />
-                {error.length !== 0 && <Message severity="error" text={error} />}
+                {error.length !== 0 && <Message severity="error" text={error} className="validation_error"/>}
             </div>
         </>
     )

@@ -21,7 +21,7 @@ export const Email: React.FC = () => {
                            type="text"
                            name="email"
                 />
-                {error.length !== 0 && <Message severity="error" text={error} />}
+                {error.length !== 0 && <Message severity="error" text={error} className="validation_error"/>}
             </div>
         </>
     )

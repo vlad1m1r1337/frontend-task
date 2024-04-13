@@ -3,6 +3,7 @@ import {useAppDispatch, useAppSelector} from "../hooks";
 import {setName} from "../store/tableSlice";
 import { InputText } from 'primereact/inputtext';
 import { Message } from 'primereact/message';
+import '../css/common.css'
 
 export const Name : React.FC = () => {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -27,7 +28,7 @@ export const Name : React.FC = () => {
                            name="name"
                            value={value}
                 />
-                {error.length !== 0 && <Message severity="error" text={error} />}
+                {error.length !== 0 && <Message severity="error" text={error} className="validation_error"/>}
             </div>
         </>
     )

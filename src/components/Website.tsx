@@ -21,7 +21,7 @@ export const Website: React.FC = () => {
                            type="text"
                            name="website"
                 />
-                {error.length !== 0 && <Message severity="error" text={error} />}
+                {error.length !== 0 && <Message severity="error" text={error} className="validation_error"/>}
             </div>
         </>
     )
