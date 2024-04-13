@@ -39,12 +39,12 @@ const  validateUsername = (username : string) : string => {
 }
 
 const validatePhone = (phone : string) : string => {
-    const phoneRegex = /^[0-9\s]+$/;
+    const phoneRegex = /^[0-9]+$/;
 
     if (phone.trim() === "") {
         return "Номер телефона не может быть пустым.";
     } else if (!phoneRegex.test(phone)) {
-        return "Номер телефона может содержать только цифры и пробелы.";
+        return "Номер телефона может содержать только цифры.";
     } else {
         return "";
     }
@@ -135,6 +135,10 @@ const handleWebsite = (website: string, dispatch: AppDispatch) => {
 
 export const inputs_validation = ( table: Table, dispatch: AppDispatch) : number => {
     let count = 0;
-    count += handleName(table.name, dispatch) + handleUsername(table.username, dispatch) + handleEmail(table.email, dispatch) + handlePhone(table.phone, dispatch) + handleWebsite(table.website, dispatch);
+    count += handleName(table.name, dispatch)
+        + handleUsername(table.username, dispatch)
+        + handleEmail(table.email, dispatch)
+        + handlePhone(table.phone, dispatch)
+        + handleWebsite(table.website, dispatch);
     return count;
 }

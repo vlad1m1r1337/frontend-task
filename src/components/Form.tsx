@@ -14,6 +14,7 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 export const Form : React.FC = () => {
     const dispatch = useAppDispatch();
     const addToTable = useAppSelector(state => state.table.addToTable);
+    const loading = useAppSelector(state => state.table.request_status.loading);
 
     const addField = (e:  React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
@@ -28,7 +29,7 @@ export const Form : React.FC = () => {
                 <Email />
                 <Phone />
                 < Website />
-                <Button onClick={e => addField(e)} type="submit">Отправить</Button>
+                <Button onClick={e => addField(e)} loading={loading} type="submit">Отправить</Button>
             </form>
         </header>
     )

@@ -4,7 +4,7 @@
       "name": "John Doe",
       "username": "johndoe",
       "email": "johndoe@example.com",
-      "phone": "1-477-935-8478 x6430",
+      "phone": "5551234567",
       "website": "google.com",
       "id": "23cd"
     },
@@ -12,7 +12,7 @@
       "name": "Jane Smith",
       "username": "janesmith",
       "email": "janesmith@example.com",
-      "phone": "1-234-567-8901",
+      "phone": "9876543210",
       "website": "example.com",
       "id": "ee67"
     },
@@ -20,9 +20,17 @@
       "name": "Michael Johnson",
       "username": "michaelj",
       "email": "michaelj@example.com",
-      "phone": "1-345-678-9012",
+      "phone": "8885559999",
       "website": "michaeljohnson.com",
       "id": "5934"
+    },
+    {
+      "id": "4b49",
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "phone": "5551234567",
+      "username": "johndoe",
+      "website": "google.com"
     }
   ]
 }
