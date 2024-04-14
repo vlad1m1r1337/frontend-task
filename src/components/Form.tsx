@@ -1,14 +1,8 @@
 import React from "react";
-import {Name} from "./Name";
-import {Username} from "./Username";
-import {Email} from "./Email";
-import {Phone} from "./Phone";
-import {Website} from "./Website";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import {postToTable} from "../store/tableSlice";
 import { Button } from 'primereact/button';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
-import {Message} from "primereact/message";
 import {NameWithError} from "./NameWithError";
 import {UsernameWithError} from "./UsernameWithError";
 import {PhoneWithError} from "./PhoneWithError";
@@ -31,8 +25,8 @@ export const Form : React.FC = () => {
             <h2 className="header_name">Форма Отправки</h2>
             <form className="form_wrapper">
                 <NameWithError/>
-                <EmailWithError />
                 <UsernameWithError/>
+                <EmailWithError />
                 <PhoneWithError />
                 <WebsiteWithError />
                 <Button label="Отправить" icon="pi pi-check" loading={loading && !fetch_loading} onClick={e => addField(e)}/>

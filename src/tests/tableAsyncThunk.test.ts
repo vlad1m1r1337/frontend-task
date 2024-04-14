@@ -64,34 +64,16 @@ describe("TableSlice", () => {
         expect(state.table).toEqual(mockTable);
         expect(state.request_status).toEqual({
             error: null,
+            fetch_loading: false,
             loading: false,
         });
     })
     it ('should change status and error wih "fetchTable.rejected" action', () => {
-        // @ts-ignore
-        const state = tableReducer(initialState, fetchTable.rejected(null, 'string', 'string', 'Ошибка запроса'));
-        console.log(state.request_status)
+        const state = tableReducer(initialState, fetchTable.rejected(null, 'string', undefined, 'Ошибка запроса'));
         expect(state.request_status).toEqual({
             error: 'Ошибка запроса',
+            fetch_loading: false,
             loading: false,
         });
     })
 })
-
-// import React from 'react';
-// import { render } from '@testing-library/react';
-// import '@testing-library/jest-dom/extend-expect';
-// import {Form} from '../components/Form';
-// import { Provider } from 'react-redux';
-// import store from '../store';
-// import {PrimeReactProvider} from "primereact/api";
-//
-// test('renders button with correct text', () => {
-//     const { getByText } = render(
-//         <Provider store={store}>
-//             <Form />
-//         </Provider>
-//     );
-//     const buttonElement = getByText(/Отправить/i);
-//     expect(buttonElement).toBeInTheDocument();
-// });

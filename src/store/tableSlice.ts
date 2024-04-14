@@ -6,9 +6,10 @@ export const API_URL = 'http://localhost:3001/users';
 export const fetchTable = createAsyncThunk<Table[], undefined, {rejectValue: string}>(
     'table/fetchTable',
     async function (_,  {rejectWithValue}) {
-        const response = await fetch(API_URL);
+        const response = await fetch("API_URL");
 
         if (!response.ok) {
+            console.log(response);
             return rejectWithValue('Ошибка запроса');
         }
 
@@ -21,7 +22,6 @@ export const postToTable = createAsyncThunk<Table[], Table, {rejectValue: string
     'table/addToTable',
     async function (table, {rejectWithValue, dispatch}) {
         if (inputs_validation(table, dispatch) !== 0) { return ;}
-        console.log("some");
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
@@ -136,6 +136,15 @@ const tableSlice = createSlice({
                 username_input: '',
                 website_input: '',
             }
+        },
+        trim_inputs: (state) => {
+            state.addToTable = {
+                name: state.addToTable.name.trim(),
+                email: state.addToTable.email.trim(),
+                phone: state.addToTable.phone.trim(),
+                username: state.addToTable.username.trim(),
+                website: state.addToTable.website.trim(),
+            }
         }
     },
     extraReducers: builder => {
@@ -156,7 +165,6 @@ const tableSlice = createSlice({
             })
             .addCase(postToTable.fulfilled, (state, action) => {
                 const arr = Object.values(state.input_validation);
-                console.log(arr);
                 if (arr.every((el) => el === '')) {
                     state.addToTable = {
                         name: '',
@@ -169,6 +177,7 @@ const tableSlice = createSlice({
                 state.request_status.loading = false;
             })
             .addMatcher(isError, (state, action:PayloadAction<string>) => {
+                console.log("payload", action);
                 state.request_status.error = action.payload;
                 state.request_status.loading = false;
                 state.request_status.fetch_loading = false;
@@ -177,6 +186,7 @@ const tableSlice = createSlice({
 });
 
 export const {
+    trim_inputs,
     set_input_website_error,
     set_input_phone_error,
     set_input_email_error,

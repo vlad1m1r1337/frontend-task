@@ -1,12 +1,12 @@
-import { Table } from "../store/tableSlice";
 import { AppDispatch } from "../store";
 import {
-    reset_inputs_errors,
     set_input_name_error,
     set_input_username_error,
     set_input_email_error,
     set_input_phone_error,
     set_input_website_error,
+    trim_inputs,
+    Table
 } from "../store/tableSlice";
 
 const validateName = (name : string): string => {
@@ -58,13 +58,12 @@ const validateWebsite = (website : string) : string =>  {
     } else if (!websiteRegex.test(website)) {
         return "Введите корректный адрес веб-сайта.";
     } else {
-        return ""; // Валидация прошла успешно
+        return "";
     }
 }
 
 
 const validateEmail = (email: string) : string => {
-    // Проверяем, чтобы email соответствовал стандарту RFC 5322
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (email.trim() === "") {
@@ -72,7 +71,7 @@ const validateEmail = (email: string) : string => {
     } else if (!emailRegex.test(email)) {
         return "Введите корректный email.";
     } else {
-        return ""; // Валидация прошла успешно
+        return "";
     }
 }
 
@@ -133,7 +132,19 @@ const handleWebsite = (website: string, dispatch: AppDispatch) => {
     }
 }
 
+const trim_table = (table: Table) => {
+    return {
+        name: table.name.trim(),
+        username: table.username.trim(),
+        email: table.email.trim(),
+        phone: table.phone.trim(),
+        website: table.website.trim(),
+    }
+}
+
 export const inputs_validation = ( table: Table, dispatch: AppDispatch) : number => {
+    dispatch(trim_inputs());
+    table = trim_table(table);
     let count = 0;
     count += handleName(table.name, dispatch)
         + handleUsername(table.username, dispatch)

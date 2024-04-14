@@ -16,7 +16,7 @@ export const Table : React.FC = () => {
 
     useEffect(() => {
         dispatch(fetchTable());
-    }, []);
+    }, [dispatch]);
 
 
     const columns = [
