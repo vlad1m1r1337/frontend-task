@@ -8,7 +8,7 @@ export const Email: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const changeHandler = (value : string) => {
-        dispatch(setEmail(value));
+        dispatch(setEmail(value.trim()));
     }
     return (
         <>

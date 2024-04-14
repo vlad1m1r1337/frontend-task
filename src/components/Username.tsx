@@ -9,7 +9,7 @@ export const Username: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const changeHandler = (value : string) => {
-        dispatch(setUsername(value));
+        dispatch(setUsername(value.trim()));
     }
     return (
         <>

@@ -8,7 +8,7 @@ export const Website: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const changeHandler = (value : string) => {
-        dispatch(setWebsite(value));
+        dispatch(setWebsite(value.trim()));
     }
     return (
         <>

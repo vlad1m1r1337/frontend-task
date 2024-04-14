@@ -9,7 +9,7 @@ export const Name : React.FC = () => {
     const value = useAppSelector(state => state.table.addToTable.name);
     const dispatch = useAppDispatch();
     const changeHandler = (value : string) => {
-        dispatch(setName(value));
+        dispatch(setName(value.trim()));
     }
 
     useEffect(() => {

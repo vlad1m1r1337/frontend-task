@@ -8,7 +8,7 @@ export const Phone: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const changeHandler = (value : string) => {
-        dispatch(setPhone(value));
+        dispatch(setPhone(value.trim()));
     }
     return (
         <>
