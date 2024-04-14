@@ -3,17 +3,18 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: Arial, sans-serif;
 }
 
 .inputs {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  position: relative;
 }
 
 .input_with_error {
   display: flex;
+  align-items: flex-end;
   gap: 10px;
 }
 

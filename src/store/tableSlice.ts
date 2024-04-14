@@ -50,6 +50,7 @@ export type Table = {
 type RequestStatus = {
     error: string | null;
     loading: boolean;
+    fetch_loading: boolean;
 }
 
 type InputValidation = {
@@ -79,6 +80,7 @@ export const initialState: InitialState = {
     request_status: {
         error: null,
         loading: false,
+        fetch_loading: false,
     },
     input_validation: {
         name_input: '',
@@ -140,11 +142,13 @@ const tableSlice = createSlice({
         builder
             .addCase(fetchTable.pending, state => {
                 state.request_status.loading = true;
+                state.request_status.fetch_loading = true;
                 state.request_status.error = null;
             })
             .addCase(fetchTable.fulfilled , (state, action) => {
                 state.table = action.payload;
                 state.request_status.loading = false;
+                state.request_status.fetch_loading = false;
             })
             .addCase(postToTable.pending, state => {
                 state.request_status.loading = true;
@@ -167,6 +171,7 @@ const tableSlice = createSlice({
             .addMatcher(isError, (state, action:PayloadAction<string>) => {
                 state.request_status.error = action.payload;
                 state.request_status.loading = false;
+                state.request_status.fetch_loading = false;
             })
     }
 });
