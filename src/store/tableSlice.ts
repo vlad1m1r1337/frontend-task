@@ -1,20 +1,20 @@
-import {createSlice, PayloadAction, createAsyncThunk, AnyAction} from "@reduxjs/toolkit";
+import {AnyAction, createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AppDispatch} from "./index";
 import {inputs_validation} from "../utils/inputs_validation";
+
 export const API_URL = 'http://localhost:3001/users';
 
 export const fetchTable = createAsyncThunk<Table[], undefined, {rejectValue: string}>(
     'table/fetchTable',
     async function (_,  {rejectWithValue}) {
-        const response = await fetch("API_URL");
+        const response = await fetch(API_URL);
 
         if (!response.ok) {
             console.log(response);
             return rejectWithValue('Ошибка запроса');
         }
 
-        const data = await response.json();
-        return data;
+        return await response.json();
     }
 );
 
@@ -34,8 +34,7 @@ export const postToTable = createAsyncThunk<Table[], Table, {rejectValue: string
             return rejectWithValue('Ошибка запроса');
         }
         dispatch(mergeTable());
-        const data = await response.json();
-        return data;
+        return await response.json();
     }
 );
 
@@ -176,9 +175,8 @@ const tableSlice = createSlice({
                 }
                 state.request_status.loading = false;
             })
-            .addMatcher(isError, (state, action:PayloadAction<string>) => {
-                console.log("payload", action);
-                state.request_status.error = action.payload;
+            .addMatcher(isError, (state) => {
+                state.request_status.error = 'Ошибка запроса';
                 state.request_status.loading = false;
                 state.request_status.fetch_loading = false;
             })
