@@ -1,8 +1,7 @@
 import {AnyAction, createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AppDispatch} from "./index";
 import {inputs_validation} from "../utils/inputs_validation";
-
-export const API_URL = 'http://localhost:3001/users';
+import { API_URL } from "../constants/constants";
 
 export const fetchTable = createAsyncThunk<Table[], undefined, {rejectValue: string}>(
     'table/fetchTable',
